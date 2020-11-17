@@ -5,8 +5,287 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TokioHotelFanApp.PresentationLayer"
         mc:Ignorable="d"
-        Title="Top5View" Height="450" Width="800">
-    <Grid>
-        
+        Title="Game Session View"
+        Width="900"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow">
+    <Window.Background>
+        <ImageBrush Stretch="Fill" ImageSource="..\Images\TH4.jpg"
+            AlignmentY="Top" AlignmentX="Center"/>
+    </Window.Background>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <LinearGradientBrush
+        x:Key="GrayBlueGradientBrush"
+        StartPoint="0,0"
+        EndPoint="1,0"
+        Opacity="50">
+            <GradientStop Color="MidnightBlue" Offset="0"/>
+            <GradientStop Color="#CCCCFF" Offset="0.25" />
+            <GradientStop Color="#CCCCFF" Offset="0.75" />
+            <GradientStop Color="MidnightBlue" Offset="1" />
+        </LinearGradientBrush>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="PowderBlue"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+        <Style x:Key="MainPanelLabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+        </Style>
+        <Style x:Key="MainPanelButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="Width" Value="75"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="Silver"/>
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
+                ClipToBounds="True">
+                            <Rectangle
+                  x:Name="innerRectangle"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Fill="{TemplateBinding Background}"
+                  RadiusX="5"
+                  RadiusY="5" />
+                            <!-- Present Content (text) of the button. -->
+                            <DockPanel Name="myContentPresenterDockPanel">
+                                <ContentPresenter
+                    x:Name="myContentPresenter"
+                    Margin="2"
+                    HorizontalAlignment="Center"
+                    Content="{TemplateBinding  Content}"
+                    TextBlock.Foreground="Black" />
+                            </DockPanel>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="LightSteelBlue" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MainPanelTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Padding" Value="3,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border
+                Background="{TemplateBinding Background}"
+                x:Name="Bd"
+                BorderBrush="Black"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="5">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid
+      Background="Black" Opacity=".7">
+        <Border
+        Margin="10"
+        Style="{StaticResource BorderStyle}">
+            <Grid
+          Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="10,0,10,10"
+            Style="{StaticResource BorderStyle}">
+                    <Grid>                  
+                        <StackPanel Margin="0,30,0,0">
+                            <TabControl 
+                                    x:Name="LocationInfoTabControl"
+                                    Width="380">
+                                <TabItem Header="Schrei"
+                                        x:Name="SchreiAlbumTabItem">
+                                    <DataGrid 
+                                            x:Name="SchreiSongsDataGrid"
+                                            Height="400"
+                                            ItemsSource="{Binding Album.Schrei}" 
+                                            SelectedItem="{Binding CurrentSong}"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn 
+                                                    Header="Songs" 
+                                                    Binding="{Binding Schrei.Songs }"
+                                                    Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </TabItem>
+                                <TabItem Header="Zimmer483"
+                                        x:Name="ZimmerAlbumTabItem">
+                                    <DataGrid 
+                                            x:Name="ZimmerSongsDataGrid"
+                                            Height="400"
+                                            ItemsSource="{Binding Album.Zimmer483}" 
+                                            SelectedItem="{Binding CurrentSong}"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn 
+                                                    Header="Songs" 
+                                                    Binding="{Binding Zimmer483.Songs }"
+                                                    Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </TabItem>
+                                <TabItem Header="Humanoid"
+                                        x:Name="HumanoidAlbumTabItem">
+                                    <DataGrid 
+                                            x:Name="HumanoidSongsDataGrid"
+                                            Height="400"
+                                            ItemsSource="{Binding Album.Humanoid}" 
+                                            SelectedItem="{Binding CurrentSong}"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn 
+                                                    Header="Songs" 
+                                                    Binding="{Binding Humanoid.Songs }"
+                                                    Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </TabItem>
+                                <TabItem Header="Kings of Suburbia"
+                                        x:Name="KingsOfSuburbiaAlbumTabItem">
+                                    <DataGrid 
+                                            x:Name="KingsofSuburbiaSongsDataGrid"
+                                            Height="400"
+                                            ItemsSource="{Binding Album.KingsOfSuburbia}" 
+                                            SelectedItem="{Binding CurrentSong}"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn 
+                                                    Header="Songs" 
+                                                    Binding="{Binding KingsOfSuburbia.Songs }"
+                                                    Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </TabItem>
+                                <TabItem Header="Dream Machine"
+                                        x:Name="DreamMachineAlbumTabItem">
+                                    <DataGrid 
+                                            x:Name="DreamMachineSongsDataGrid"
+                                            Height="400"
+                                            ItemsSource="{Binding Album.DreamMachine}" 
+                                            SelectedItem="{Binding CurrentSong}"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn 
+                                                    Header="Songs" 
+                                                    Binding="{Binding DreamMachine.Songs }"
+                                                    Width="*"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </TabItem>
+
+                            </TabControl>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Grid>
+                    <StackPanel
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0">
+                        <StackPanel               
+                            Orientation="Vertical"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0">
+                            <Label Content="Top 5" FontSize="40" Margin="0,0,0,20" FontFamily="Permanent Marker" Foreground="AntiqueWhite">
+                            </Label>
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                            Margin="10">
+                            <Label Content="#1    " Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox Name="NameTextBox" Text="{Binding Top5.first_song}"  Style="{StaticResource MainPanelTextBoxStyle}" />
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                            Margin="10">
+                            <Label Content="#2    " Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox Name="HouseTextbox"  Text="{Binding Top5.second_song}" Style="{StaticResource MainPanelTextBoxStyle}"></TextBox>
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                            Margin="10">
+                            <Label Content="#3    " Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox x:Name="ArmyNameTextbox" Text="{Binding Top5.third_song}" Style="{StaticResource MainPanelTextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                            Margin="10">
+                            <Label Content="#4    " Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox Text="{Binding Top5.forth_song}" Style="{StaticResource MainPanelTextBoxStyle}"/>
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                                Margin="10">
+                            <Label Content="#5    " Style="{StaticResource MainPanelLabelStyle}"/>
+                            <TextBox Text="{Binding Top5.fifth_song}" Style="{StaticResource MainPanelTextBoxStyle}"/>
+                        </StackPanel>
+
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                                Margin="10">
+                            <Button Content="Add" Name="AddButton" Width="180"/>
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                                Margin="10">
+                            <Button Content="Edit" Name="EditButton" Width="180"/>
+                        </StackPanel>
+                        <StackPanel
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Right"
+                                Margin="10">
+                            <Button Content="Delete" Name="DeleteButton" Width="180"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
