@@ -19,8 +19,14 @@ namespace TokioHotelFanApp.PresentationLayer
     /// </summary>
     public partial class DiscographyView : Window
     {
+        DiscographyViewModel _discographyViewModel;
         public DiscographyView()
         {
+
+        }
+        public DiscographyView(DiscographyViewModel discographyViewModel)
+        {
+            _discographyViewModel = discographyViewModel;
             InitializeComponent();
         }
     }

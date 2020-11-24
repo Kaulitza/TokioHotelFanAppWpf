@@ -113,10 +113,6 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="11*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
                 <Border
             Grid.Row="0"
             Grid.Column="0"
@@ -134,33 +130,44 @@
                 <StackPanel
                 Orientation="Vertical"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Margin="10,0,10,10">
+                VerticalAlignment="Top"
+                Margin="10,50,10,10">
                     <Label 
                         Content="Albums"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Style="{StaticResource MainPanelLabelStyle}"/>
-                    <TabControl 
-                                    x:Name="AlbumsTabControl"
-                                    Width="200">
-                        <TabItem Header="Schrei"
-                                        x:Name="SchreiAlbumTabItem">
-                        </TabItem>
-                        <TabItem Header="Zimmer483"
-                                        x:Name="ZimmerAlbumTabItem">
-                        </TabItem>
-                        <TabItem Header="Humanoid"
-                                        x:Name="HumanoidAlbumTabItem">
-                        </TabItem>
-                        <TabItem Header="Kings of Suburbia"
-                                        x:Name="KingsOfSuburbiaAlbumTabItem">
-                        </TabItem>
-                        <TabItem Header="Dream Machine"
-                                        x:Name="DreamMachineAlbumTabItem">
-                        </TabItem>
-                    </TabControl>
+                    <ListBox x:Name="AlbumsListBox" FontFamily="Permanent Marker" Margin="0,20,0,0" Height="100" Width="200" Opacity=".8" ItemsSource="{Binding Albums}" SelectedItem="{Binding SelectedAlbum}" DisplayMemberPath="AlbumName" TabIndex="6" IsTabStop="True" />
+
                 </StackPanel>
+
+                <StackPanel Margin="0,200,0,0">
+                    <Label Foreground="White" Content="Sort by" HorizontalAlignment="Left" Margin="15,0,0,0" FontFamily="Permanent Marker"></Label>
+                    <RadioButton Foreground="White" x:Name="SongSortId" IsChecked="True"  HorizontalAlignment="Left" Margin="20,10,0,0" FontFamily="Permanent Marker" Content="Song Id" Command="{Binding RadioCommandSortSongID}" CommandParameter="Songs" TabIndex="7"/>
+                    <RadioButton Foreground="White" x:Name="SongSortName" Content="Song Name"  HorizontalAlignment="Left" Margin="20,10,0,0" FontFamily="Permanent Marker" Command="{Binding RadioCommandSortSortName}" CommandParameter= "Songs" TabIndex="8"/>
+                    <Label Content="Filter by" Foreground="White" HorizontalAlignment="Left" Margin="20,30,0,0" FontFamily="Permanent Marker" RenderTransformOrigin="0.202,-2.562"/>
+                    <ComboBox Text="Filter By" Width="120" Height="30" HorizontalAlignment="Left" Margin="20,10,0,0" FontFamily="Permanent Marker" TabIndex="9" 
+                      SelectedItem="{Binding SelectedFilter}">
+                        <ComboBoxItem>Song Name</ComboBoxItem>
+                        <ComboBoxItem>Album Name</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+
+                
+                <StackPanel Orientation="Vertical" Margin="0,400,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Foreground="White" FontFamily="Permanent Marker" Margin="20,0,0,20" Content="Album" Command="{Binding RadioCommandSearchCrit}" CommandParameter="Album" TabIndex="1"/>
+                        <RadioButton Foreground="White" FontFamily="Permanent Marker" Margin="20,0,0,20" Content="Song" Command="{Binding RadioCommandSearchCrit}" CommandParameter="Song" TabIndex="2"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="SearchTextBox" FontFamily="Permanent Marker" Text=" " Margin="20,0,0,0" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" Background="White" Width="100" Height="20" TabIndex="4" />
+                        <Button  Content="Search" Background="Firebrick" TabIndex="5"
+                        Command="{Binding ButtonSearchCommand}" 
+                        CommandParameter="{Binding ElementName=SearchTextBox}" Margin="20,0,80,0" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+
                 <Border
             Grid.Row="0"
             Grid.Column="1"
@@ -173,23 +180,20 @@
                                       Width="200"
                 Margin="25,0,0,0">
                             <Label Foreground="AntiqueWhite"  Content="Name" Name="AlbumName" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                            <TextBox Name="AlbumNameTextBox" Text="{Binding SelectedAlbum.Name}"  Style="{StaticResource MainPanelTextBoxStyle}" />
+                            <TextBox Name="AlbumNameTextBox" Text="{Binding SelectedAlbum.AlbumName}"  Style="{StaticResource MainPanelTextBoxStyle}" />
                             <Label Foreground="AntiqueWhite"  Content="Release Date" Name="AlbumReleaseDate" Style="{StaticResource MainPanelLabelStyle}"></Label>
                             <TextBox Name="ReleaseDateTextBox" Text="{Binding SelectedAlbum.ReleaseDate}"  Style="{StaticResource MainPanelTextBoxStyle}" />
                             <Label Foreground="AntiqueWhite"  Content="Record Company" Name="AlbumRecordCompany" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                            <TextBox Name="RecordCompanyTextBox" Text="{Binding SelectedAlbum.ReleaseDate}"  Style="{StaticResource MainPanelTextBoxStyle}" />
-                            <Label Foreground="AntiqueWhite"  Content="Singles" Name="AlbumSingles" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                            <TextBox Name="SinglesDateTextBox" Text="{Binding SelectedAlbum.ReleaseDate}"  Style="{StaticResource MainPanelTextBoxStyle}" />
+                            <TextBox Name="RecordCompanyTextBox" Text="{Binding SelectedAlbum.RecordCompany}"  Style="{StaticResource MainPanelTextBoxStyle}" />
+                            <Label Foreground="AntiqueWhite"  Content="Number of Songs" Name="AlbumSonges" Style="{StaticResource MainPanelLabelStyle}"></Label>
+                            <TextBox Name="SinglesDateTextBox" Text="{Binding SelectedAlbum.NumberofSongs}"  Style="{StaticResource MainPanelTextBoxStyle}" />
                             <Label Foreground="AntiqueWhite"  Content="Amount Sold" Name="AlbumAmountSold" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                            <TextBox Name="AmountSoldDateTextBox" Text="{Binding SelectedAlbum.ReleaseDate}"  Style="{StaticResource MainPanelTextBoxStyle}" />
+                            <TextBox Name="AmountSoldDateTextBox" Text="{Binding SelectedAlbum.AmountSold}"  Style="{StaticResource MainPanelTextBoxStyle}" />
                         </StackPanel>
-                        <StackPanel   Orientation="Vertical"
-                HorizontalAlignment="center"
-                VerticalAlignment="top"
-                                      Width="200"
-                Margin="25,250,0,0">
-                            <TextBox Name="AlbumSongsTextBox" Text="{Binding SelectedAlbum.Songs}" Height="250" />
-                        </StackPanel>
+                        <Grid Grid.Row="2" Grid.Column="0">
+                            <Label  HorizontalAlignment="Left" Margin="30,270,0,0" Content="Songs" Foreground="White" FontFamily="Permanent Marker"/>
+                            <ListBox x:Name="SongsListBox" FontFamily="Permanent Marker" Margin="0,200,0,0" Height="100" Width="200" Opacity=".8" ItemsSource="{Binding SelectedItem.SongList, ElementName=AlbumsListBox}" SelectedItem="{Binding SelectedAlbumSongs}" DisplayMemberPath="GermanName" TabIndex="6" IsTabStop="True" />
+                        </Grid>
                     </Grid>
                 </Border>
                 <Border
@@ -207,28 +211,34 @@
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Border Style="{StaticResource BorderStyle}" Grid.Column="2" Grid.Row="0">
-                    <StackPanel>
-                        <Label Foreground="AntiqueWhite"  Content="Name" Name="SongName" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                        <TextBox Name="SongNameTextBox" Text="{Binding SelectedSong.Name}"  Style="{StaticResource MainPanelTextBoxStyle}" />
-                        <Label Foreground="AntiqueWhite"  Content="Album" Name="SongAlbum" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                        <TextBox Name="SongAlbumTextBox" Text="{Binding SelectedSong.Album}"  Style="{StaticResource MainPanelTextBoxStyle}" />
-                        <Label Foreground="AntiqueWhite"  Content="Writers" Name="SongWrittenBy" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                        <TextBox Name="WrittenByTextBox" Text="{Binding SelectedSong.Writers}"  Style="{StaticResource MainPanelTextBoxStyle}" />
-                        <Label Foreground="AntiqueWhite"  Content="Singles" Name="SongProducer" Style="{StaticResource MainPanelLabelStyle}"></Label>
-                        <TextBox Name="ProducerTextBox" Text="{Binding SelectedSong.Producer}"  Style="{StaticResource MainPanelTextBoxStyle}" />
-                    </StackPanel>
+                <Border
+            Grid.Row="1"
+            Grid.Column="3"
+            Style="{StaticResource BorderStyle}">
+                    <Grid
+              Margin="5">
+                        <StackPanel   Orientation="Vertical"
+                HorizontalAlignment="center"
+                VerticalAlignment="top"
+                                      Width="200"
+                Margin="25,150,0,0">
+                            <Label Foreground="AntiqueWhite"  Content="Name" Name="SongName" Style="{StaticResource MainPanelLabelStyle}"></Label>
+                            <TextBox Name="SongNameTextBox"  Text="{Binding SelectedItem.GermanName, ElementName=SongsListBox}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
+                            <Label Foreground="AntiqueWhite"  Content="Album" Name="SongAlbum" Style="{StaticResource MainPanelLabelStyle}"></Label>
+                            <TextBox Name="SongAlbumTextBox" Text="{Binding SelectedAlbum.AlbumName}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
+                            <Label Foreground="AntiqueWhite"  Content="Writers" Name="SongWrittenBy" Style="{StaticResource MainPanelLabelStyle}"></Label>
+                            <TextBox Name="WrittenByTextBox" Text="{Binding SelectedItem.Writer_name, ElementName=SongsListBox}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
+                            <Label Foreground="AntiqueWhite"  Content="Singles" Name="SongProducer" Style="{StaticResource MainPanelLabelStyle}"></Label>
+                            <TextBox Name="ProducerTextBox" Text="{Binding SelectedItem.Composer_name, ElementName=SongsListBox}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
+                        </StackPanel>
+
+                        <Grid Grid.Row="3">
+                            <Label  HorizontalAlignment="Left" Margin="30,350,0,0" Content="Searched Songs" Foreground="White" FontFamily="Permanent Marker"/>
+                            <ListBox x:Name="SongSearch" FontFamily="Permanent Marker" Margin="0,350,0,0" Height="100" Width="200" Opacity=".8" ItemsSource="{Binding SearchedSongs}"  DisplayMemberPath="GermanName" TabIndex="6" IsTabStop="True" />
+                        </Grid>
+                    </Grid>
                 </Border>
             </Grid>
-        </Border>
-        <Border
-                Grid.Row="1"
-            Style="{StaticResource BorderStyle}">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="UserProfileButton"  Margin="250,500,20,0" HorizontalAlignment="Left" Width="100" Content="User Profile" Click="UserProfileButton_Click"></Button>
-                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="Top5Button" Margin="20,500,20,0" HorizontalAlignment="Center"  Width="100" Content="Top 5" Click="Top5Button_Click"></Button>
-                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="BandInformationButton" Margin="20,500,20,0" HorizontalAlignment="Right"  Width="100" Content="Band Information" Click="BandInformationButton_Click"></Button>
-            </StackPanel>
         </Border>
     </Grid>
 </Window>

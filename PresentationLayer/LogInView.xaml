@@ -3,206 +3,64 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TokioHotelFanApp.PresentationLayer"
-        mc:Ignorable="d"
+         mc:Ignorable="d"
+              Title="Login"
         Width="900"
         Height="600"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="SingleBorderWindow"
-        Title="Log In">
+        WindowStyle="SingleBorderWindow">
     <Window.Background>
-        <ImageBrush Stretch="Fill" ImageSource="..\Images\TH2.jpg"
+        <ImageBrush Stretch="Fill" ImageSource="..\Images\login.jpg"
             AlignmentY="Top" AlignmentX="Center"/>
     </Window.Background>
+
     <Window.Resources>
-        <LinearGradientBrush
-        x:Key="GrayBlueGradientBrush"
-        StartPoint="0,0"
-        EndPoint="1,0"
-        Opacity="50">
-            <GradientStop Color="MidnightBlue" Offset="0"/>
-            <GradientStop Color="#CCCCFF" Offset="0.25" />
-            <GradientStop Color="#CCCCFF" Offset="0.75" />
-            <GradientStop Color="MidnightBlue" Offset="1" />
-        </LinearGradientBrush>
-        <Style x:Key="BorderStyle" TargetType="Border">
-            <Setter Property="BorderBrush" Value="PowderBlue"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="10"/>
-        </Style>
-        <Style x:Key="MainPanelLabelStyle" TargetType="Label">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Lucida Console"/>
-        </Style>
-        <Style x:Key="MainPanelButtonStyle" TargetType="Button">
-            <Setter Property="Margin" Value="10,0,10,0"/>
-            <Setter Property="Width" Value="75"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Background" Value="Silver"/>
-            <Setter Property="Foreground" Value="MidnightBlue"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid
-                Width="{TemplateBinding Width}"
-                Height="{TemplateBinding Height}"
-                ClipToBounds="True">
-                            <Rectangle
-                  x:Name="innerRectangle"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
-                  Fill="{TemplateBinding Background}"
-                  RadiusX="5"
-                  RadiusY="5" />
-                            <!-- Present Content (text) of the button. -->
-                            <DockPanel Name="myContentPresenterDockPanel">
-                                <ContentPresenter
-                    x:Name="myContentPresenter"
-                    Margin="2"
-                    HorizontalAlignment="Center"
-                    Content="{TemplateBinding  Content}"
-                    TextBlock.Foreground="Black" />
-                            </DockPanel>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <SolidColorBrush Color="LightSteelBlue" />
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style x:Key="MainPanelTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Foreground" Value="MidnightBlue"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="Padding" Value="3,0,0,0"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Background" Value="WhiteSmoke"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Border
-                Background="{TemplateBinding Background}"
-                x:Name="Bd"
-                BorderBrush="Black"
-                BorderThickness="{TemplateBinding BorderThickness}"
-                CornerRadius="5">
-                            <ScrollViewer x:Name="PART_ContentHost"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Orange.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
-    <Grid
-      Background="Black" Opacity=".7">
+
+    <Grid Background="Black" Opacity=".7" Margin="10">
+
+          <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+          </Grid.ColumnDefinitions>
+
         <Border
-        Margin="10"
-        Style="{StaticResource BorderStyle}">
-            <Grid
-          Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Border
             Grid.Row="0"
             Grid.Column="1"
-            Margin="0,0,0,5"
-            Style="{StaticResource BorderStyle}">
-                </Border>
-                <Grid Grid.Column="1" Grid.Row="0">
-                    <StackPanel
-                Orientation="Vertical"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Margin="0">
-                        <StackPanel
-                  Orientation="Horizontal"
-                  HorizontalAlignment="Center"
-                            Margin="10">
-                            <Label Content="Email    " Style="{StaticResource MainPanelLabelStyle}"/>
-                            <TextBox Name="EmailTextbox" Text="{Binding User.Email}" Style="{StaticResource MainPanelTextBoxStyle}"/>
-                        </StackPanel>
-                        <StackPanel
-                  Orientation="Horizontal"
-                  HorizontalAlignment="Center"
-                            Margin="10">
-                            <Label Content="Password    " Style="{StaticResource MainPanelLabelStyle}"/>
-                            <TextBox Name="PasswordTextbox" Width="100" Text="{Binding User.Password}" Style="{StaticResource MainPanelTextBoxStyle}">
-                            </TextBox>
-                        </StackPanel>
-                        <StackPanel
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="10">
-                            <Button Name="LogInButton" Content="Log In" Style="{StaticResource MainPanelButtonStyle}"/>
-                        </StackPanel>
-                        <StackPanel
-                  Orientation="Horizontal"
-                  HorizontalAlignment="Center"
-                            Margin="10">
-                            <Label Content="Don't have an account yet? Sign up here!    " Style="{StaticResource MainPanelLabelStyle}"/>
-                        </StackPanel>
-                        <StackPanel
-                  Orientation="Horizontal"
-                  HorizontalAlignment="Center"
-                            Margin="10">
-                            <Button Name="SignUpButton" Content="Sign Up" Style="{StaticResource MainPanelButtonStyle}"/>
-
-                        </StackPanel>
-
-
-
-
-
-                    </StackPanel>
-                </Grid>
-
-                <Border
-            Grid.Row="1"
-            Grid.ColumnSpan="3"
-            Style="{StaticResource BorderStyle}">
-                    <Grid
-              Margin="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Border
-                Grid.Column="1"
-                Margin="0"
-                Padding="0"
-                Background="WhiteSmoke"
-                Style="{StaticResource BorderStyle}">
-                            <TextBox 
-                  Name="ErrorMessageTextBlock"              
-                  Height="auto"
-                  Width="auto"
-                  Margin="10"
-                  Background="WhiteSmoke"
-                  BorderThickness="0"
-                  TextWrapping="Wrap"
-                  Text="{Binding MessageDisplay, Mode=OneWay}"
-                  VerticalScrollBarVisibility="Auto"
-                  VerticalContentAlignment="top"
-                  Style="{StaticResource MainPanelTextBoxStyle}"/>
-                        </Border>
-                    </Grid>
-                </Border>
+            Margin="0,100,0,0">
+            <Grid>
+            <StackPanel   Orientation="Vertical"
+                HorizontalAlignment="center"
+                VerticalAlignment="top"
+                                      Width="200">
+                    <TextBox Name="EmailTextBox" FontSize="18" materialDesign:HintAssist.Hint="Enter Email" materialDesign:HintAssist.Background="White"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <PasswordBox Name="PasswordTextBox" FontSize="18" materialDesign:HintAssist.Hint="Enter Password" materialDesign:HintAssist.Background="White"  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+            </StackPanel>
+            <StackPanel   Orientation="Vertical"
+                HorizontalAlignment="center"
+                VerticalAlignment="top"
+                                      Width="200"
+                Margin="0,150,0,0">
+                    <Button 
+                                Margin="0,10,0,0"
+                                Content="Login" 
+                                Name="loginButton"
+                                />
+                </StackPanel>
             </Grid>
         </Border>
+
     </Grid>
+    
 </Window>
