@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using MySqlConnector;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Data.SqlClient;
 using TokioHotelFanApp.Models;
 
 
@@ -55,8 +58,30 @@ namespace TokioHotelFanApp.DataLayer.Data
         }
 
 
+        
+        public static Users UserData()
+        {
 
+            Users user = new Users();
+            using (SqlConnection myConnection = new SqlConnection("datasource=localhost;port=3306;username=root;password"))
+            {
+                string oString = "Select * from users";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        user.UserName = oReader["name"].ToString();
+                        user.UserEmail= oReader["email"].ToString();
+                        user.Pasword= oReader["password"].ToString();
+                    }
 
+                    myConnection.Close();
+                }
+            }
+            return user;
+        }
 
 
 
