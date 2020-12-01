@@ -26,13 +26,13 @@ namespace TokioHotelFanApp.BusinessLayer
         {
             Initializer();
 
-        } 
+        }
         void Initializer()
         {
             userProfileViewModel = new UserProfileViewModel();
             user = new Users();
             user = GameSeedData.UserData();
-            userProfileViewModel.user_ = user;
+            userProfileViewModel.User = user;
             profileView.DataContext = userProfileViewModel;
             profileView.Show();
             //_albums=GameSeedData.AlbumObjects();
