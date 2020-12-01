@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TokioHotelFanApp.Models;
 
 namespace TokioHotelFanApp.PresentationLayer
 {
@@ -28,10 +30,10 @@ namespace TokioHotelFanApp.PresentationLayer
             Users user = new Users();
             using (SqlConnection myConnection = new SqlConnection("datasource=localhost;port=3306;username=root;password"))
             {
-                string oString = "update users set name='"+ UserNameTextBox.Text()+"',password='"+UserPasswordTextBox.Text()+ "'email='"+UserEmailTextBox.Text(); "
+                string oString = "update users set name='" + UserNameTextBox.Text + "',password='" + UserPasswordTextBox.Text + "'email='" + UserEmailTextBox.Text;
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
                 myConnection.Open();
-                
+
             }
         }
     }
