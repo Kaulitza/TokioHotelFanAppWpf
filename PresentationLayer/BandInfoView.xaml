@@ -158,9 +158,8 @@
                             Margin="10,0,10,10"
             Style="{StaticResource BorderStyle}">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="UserProfileButton"  Margin="170,0,20,0" HorizontalAlignment="Left" Width="100" Content="User Profile" Click="UserProfileButton_Click"></Button>
-                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="Top5Button" Margin="20,0,20,0" HorizontalAlignment="Center"  Width="100" Content="Top 5" Click="Top5Button_Click"></Button>
-                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="DiscographyButton" Margin="20,0,20,0" HorizontalAlignment="Right"  Width="100" Content="Discography" Click="DiscographyButton_Click"></Button>
+                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="UserProfileButton"  Margin="240,0,20,0" HorizontalAlignment="Left" Width="100" Content="User Profile" Click="UserProfile_Click" ></Button>
+                <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="DiscographyButton" Margin="20,0,20,0" HorizontalAlignment="Right"  Width="100" Content="Discography" Click="Discography_Click" ></Button>
                 </StackPanel>
             </Border>
         </Grid>

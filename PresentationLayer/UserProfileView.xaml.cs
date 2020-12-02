@@ -25,16 +25,12 @@ namespace TokioHotelFanApp.PresentationLayer
         {
             InitializeComponent();
         }
-        private void EditButton_Click(object sender, RoutedEventArgs e)
-        {
-            Users user = new Users();
-            using (SqlConnection myConnection = new SqlConnection("datasource=localhost;port=3306;username=root;password"))
-            {
-                string oString = "update users set name='" + UserNameTextBox.Text + "',password='" + UserPasswordTextBox.Text + "'email='" + UserEmailTextBox.Text;
-                SqlCommand oCmd = new SqlCommand(oString, myConnection);
-                myConnection.Open();
 
-            }
+        private void EditInfo_Click(object sender, RoutedEventArgs e)
+        {
+            SignUpView signUpView = new SignUpView();
+            signUpView.Show();
+            this.Close();
         }
     }
 }

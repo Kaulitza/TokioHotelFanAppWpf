@@ -23,5 +23,19 @@ namespace TokioHotelFanApp.PresentationLayer
         {
             InitializeComponent();
         }
+
+        private void UserProfile_Click(object sender, RoutedEventArgs e)
+        {
+            UserProfileView userProfileView = new UserProfileView();
+            userProfileView.Show();
+            this.Close();
+        }
+
+        private void Discography_Click(object sender, RoutedEventArgs e)
+        {
+            DiscographyView discographyView = new DiscographyView();
+            discographyView.Show();
+            this.Close();
+        }
     }
 }

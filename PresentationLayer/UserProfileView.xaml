@@ -137,7 +137,7 @@
 
                     <StackPanel>
                         <Button Height="50" Width="200" Content="Edit Information" Background="PaleVioletRed" FontFamily="Permanent Marker" Foreground="WhiteSmoke" Margin="0,190,0,0" 
-                              Command="{Binding ButtonEditInfoCommand}">
+                              Command="{Binding ButtonEditInfoCommand}" Click="EditInfo_Click">
                         </Button>
                         <Button Height="50" Width="200" Content="Edit Top 5" Background="PaleVioletRed" FontFamily="Permanent Marker" Foreground="WhiteSmoke" Margin="0,15,0,0"
                                 Command="{Binding ButtonEditTopFiveCommand}" 
