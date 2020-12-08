@@ -1,10 +1,11 @@
 ﻿using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Windows;
 using TokioHotelFanApp.Models;
-
 
 
 
@@ -57,34 +58,37 @@ namespace TokioHotelFanApp.DataLayer.Data
             //};
         }
 
-
-        
-        public static Users UserData()
+        public static Users getCurrentUser(string id)
         {
-
-            Users user = new Users();
-            using (SqlConnection myConnection = new SqlConnection("datasource=localhost;port=3306;username=root;password"))
+            string idss = id.ToString();
+            Users users = new Users();
+            try
             {
-                string oString = "Select * from users";
-                SqlCommand oCmd = new SqlCommand(oString, myConnection);
-                myConnection.Open();
-                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                string MyConString = "Server=127.0.0.1;Port=3306;Uid=root;Pwd=;Database=tokiohotel;";
+                MySqlConnection connection = new MySqlConnection(MyConString);
+                MySqlCommand command = connection.CreateCommand();
+                MySqlDataReader Reader;
+                command.CommandText = "select * from users where id=@ids";
+                command.Parameters.AddWithValue("@id", idss);
+                connection.Open();
+                Reader = command.ExecuteReader();
+                while (Reader.Read())
                 {
-                    while (oReader.Read())
-                    {
-                        user.UserName = oReader["name"].ToString();
-                        user.UserEmail= oReader["email"].ToString();
-                        user.Pasword= oReader["password"].ToString();
-                    }
-
-                    myConnection.Close();
+                    users.UserName = Reader[1].ToString();
+                    users.Pasword = Reader[2].ToString();
+                    users.UserEmail = Reader[3].ToString();
                 }
+                connection.Close();
+                return users;
+
             }
-            return user;
+            catch (Exception e)
+            {
+                MessageBox.Show("DB Error");
+            }
+
+            return users;
         }
-
-
-
 
         public static ObservableCollection<Songs> Album1Songs()
         {
@@ -905,4 +909,5 @@ namespace TokioHotelFanApp.DataLayer.Data
             };
         }
     }
+    
 }
