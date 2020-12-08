@@ -34,7 +34,7 @@
                 HorizontalAlignment="center"
                 VerticalAlignment="top"
                                       Width="200">
-                    <Label Foreground="DarkGoldenrod" Content="SIGN UP/ CHANGE INFO" FontFamily="Permanent Marker" HorizontalAlignment="Center" FontSize="15"></Label>
+                    <Label Foreground="DarkGoldenrod" Content="SIGN UP" FontFamily="Permanent Marker" HorizontalAlignment="Center" FontSize="15"></Label>
                     <Label Foreground="AntiqueWhite" FontFamily="Permanent Marker">Name</Label>
                     <TextBox Margin="0,10,0,0" Name="NameTextBox" FontSize="18" Background="White" />
                     <Label Foreground="AntiqueWhite" FontFamily="Permanent Marker">Email</Label>
@@ -47,8 +47,12 @@
                 VerticalAlignment="top"
                                       Width="200"
                 Margin="0,200,0,0">
-                    <Button Name="LogInButton" Margin="0,50,0,0"
-                    Height="50" Width="200" Content="Log In" Background="DarkGoldenrod" FontFamily="Permanent Marker" Foreground="WhiteSmoke" Click="LogInClick"/>
+                    <Button  Name="SignupButton" Margin="0,50,0,0"
+                    Height="50" Width="200" Content="Sign up" Background="DarkGoldenrod" FontFamily="Permanent Marker" Foreground="WhiteSmoke" Click="SignupButton_Click"/>
+                    <Label Foreground="AntiqueWhite" FontFamily="Permanent Marker">Already have an account?</Label>
+                    <Label Foreground="AntiqueWhite" FontFamily="Permanent Marker">Log in here</Label>
+                    <Button  x:Name="ViewLogin" Margin="0,5,0,0"
+                        Height="50" Width="200" Content="View Login" Background="DarkGoldenrod" FontFamily="Permanent Marker" Foreground="WhiteSmoke" Click="ViewLogin_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

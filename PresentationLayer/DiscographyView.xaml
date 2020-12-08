@@ -161,7 +161,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBox x:Name="SearchTextBox" FontFamily="Permanent Marker" Text=" " Margin="20,0,0,0" VerticalAlignment="Center" TextAlignment="Center" Foreground="Black" Background="White" Width="100" Height="20" TabIndex="4" />
-                        <Button  Content="Search" Background="Firebrick" TabIndex="5"
+                        <Button  Content="Search" Background="DarkSlateBlue" TabIndex="5"
                         Command="{Binding ButtonSearchCommand}" 
                         CommandParameter="{Binding ElementName=SearchTextBox}" Margin="20,0,80,0" HorizontalAlignment="Right"/>
                     </StackPanel>
@@ -211,12 +211,17 @@
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Border
+                <Border 
             Grid.Row="1"
             Grid.Column="3"
             Style="{StaticResource BorderStyle}">
                     <Grid
               Margin="5">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,50,0,0" >
+                            <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="UserProfileButton"  Margin="10,0,0,10" HorizontalAlignment="Center" Width="100" Content="User Profile" Click="UserProfileButton_Click" ></Button>
+                            <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="DiscographyButton" Margin="10,0,00,10" HorizontalAlignment="Center"  Width="100" Content="Music Player" Click="PlaySong_Click" ></Button>
+                            <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" x:Name="BandInfo" Margin="10,0,0,10" HorizontalAlignment="Center"  Width="100" Content="Band info" Click="BandInfo_Click" />
+                        </StackPanel>
                         <StackPanel   Orientation="Vertical"
                 HorizontalAlignment="center"
                 VerticalAlignment="top"
@@ -228,7 +233,7 @@
                             <TextBox Name="SongAlbumTextBox" Text="{Binding SelectedAlbum.AlbumName}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
                             <Label Foreground="AntiqueWhite"  Content="Writers" Name="SongWrittenBy" Style="{StaticResource MainPanelLabelStyle}"></Label>
                             <TextBox Name="WrittenByTextBox" Text="{Binding SelectedItem.Writer_name, ElementName=SongsListBox}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
-                            <Label Foreground="AntiqueWhite"  Content="Singles" Name="SongProducer" Style="{StaticResource MainPanelLabelStyle}"></Label>
+                            <Label Foreground="AntiqueWhite"  Content="Producer" Name="SongProducer" Style="{StaticResource MainPanelLabelStyle}"></Label>
                             <TextBox Name="ProducerTextBox" Text="{Binding SelectedItem.Composer_name, ElementName=SongsListBox}"  Style="{StaticResource MainPanelTextBoxStyle}" Margin="10,0,30,0" Width="Auto" />
                         </StackPanel>
 

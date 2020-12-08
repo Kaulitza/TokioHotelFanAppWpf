@@ -11,8 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data.SqlClient;
+using MySqlConnector;
 using System.Data;
+using TokioHotelFanApp.Models;
 
 namespace TokioHotelFanApp.PresentationLayer
 {
@@ -25,35 +26,66 @@ namespace TokioHotelFanApp.PresentationLayer
         {
             InitializeComponent();
         }
+        public Users User
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+        String id;
+        UserProfileViewModel userProfileViewModel;
+        DiscographyView _discographyView;
+        UserProfileView _userProfileView;
+        LogInView logInView;
+        Users user = new Users();
+        public String ID
+        {
+            get { return id; }
+            set { id = value; }
+
+        }
 
         private void LogInClick(object sender, RoutedEventArgs e)
         {
-            SqlConnection SqlCon = new SqlConnection(@"Data Source = localhost; Initial Catalog=TokioHotelFanApp; Integrated Security = True");
+            string email = EmailTextBox.Text.ToString();
+            string password = PasswordTextBox.Text.ToString();
+
+
             try
             {
-                if (SqlCon.State == ConnectionState.Closed)
-                    SqlCon.Open();
-                String query = "SELECT COUNT(1) FROM dbo.User WHERE Username =@Username AND Password =@Password";
-                SqlCommand sqlCommand = new SqlCommand(query, SqlCon);
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.Parameters.AddWithValue("@Username",EmailTextBox.Text);
-                sqlCommand.Parameters.AddWithValue("@Password", PasswordTextBox.Text);
-                int count = Convert.ToInt32(sqlCommand.ExecuteScalar());
-                if (count == 1)
+                string MyConString = "Server=127.0.0.1;Port=3306;Uid=root;Pwd=;Database=tokiohotel;";
+                MySqlConnection connection = new MySqlConnection(MyConString);
+                MySqlCommand command = connection.CreateCommand();
+                MySqlDataReader Reader;
+                command.CommandText = "select * from users where email =@uname AND password =@pass";
+                command.Parameters.AddWithValue("@uname", email);
+                command.Parameters.AddWithValue("@pass", password);
+
+                connection.Open();
+
+                int count = Convert.ToInt32(command.ExecuteScalar());
+
+                if(count>0)
                 {
-                    UserProfileView userProfile = new UserProfileView();
-                    userProfile.Show();
-                    this.Close();
+                    user.UserName = email;
+                    user.Pasword = password;
+                    ID = count.ToString();
                 }
                 else
                 {
-                    MessageBox.Show("Username or password is incorrect.");
-
+                    MessageBox.Show("Email or password is incorrect");
                 }
+                connection.Close();
+
+                userProfileViewModel = new UserProfileViewModel(User);
+                _userProfileView = new UserProfileView(userProfileViewModel);
+                _userProfileView.DataContext = userProfileViewModel;
+                _userProfileView.Show();
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("DB Error");
             }
 
          

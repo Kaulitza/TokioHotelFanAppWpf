@@ -110,9 +110,9 @@
                                  >
                             <TabItem.HeaderTemplate >
                                 <DataTemplate >
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="Images/Bill.jpg" Width="50" Height="50" Stretch="Fill"/>
-                                    </StackPanel>
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <Image Source="Images/TH1.jpg" Width="50" Height="50" Stretch="Fill"/>
+                                    </StackPanel>-->
                 </DataTemplate>
                             </TabItem.HeaderTemplate>
                             <Run Text="Name: Bill Kaulitz&#x0a;Role: Singer, Writer, Producer&#x0a;Date of Birth: 09/01/1989&#x0a;Nationality: German&#x0a;Lives in: Los Angeles, California,USA&#x0a;Relationship Status: Single"/>
@@ -121,9 +121,9 @@
                                         x:Name="TomTabItem">
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
+                                    <!--<StackPanel Orientation="Horizontal">
                                         <Image Source="Images/Tom.jpg" Width="50" Height="50" Stretch="Fill"/>
-                                    </StackPanel>
+                                    </StackPanel>-->
                                 </DataTemplate>
                             </TabItem.HeaderTemplate>
                             <Run Text="Name: Tom Kaulitz&#x0a;Role: Guitar, Piano, Drums, Keyboard Player, Writer, Producer&#x0a;Date of Birth: 09/01/1989&#x0a;Nationality: German&#x0a;Lives in: Los Angeles, California,USA&#x0a;Relationship Status: Married (to Heidi Klum)"/>
@@ -132,9 +132,9 @@
                                         x:Name="GeorgTabItem">
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
+                                    <!--<StackPanel Orientation="Horizontal">
                                         <Image Source="Images/Georg.jpg" Width="50" Height="50" Stretch="Fill"/>
-                                    </StackPanel>
+                                    </StackPanel>-->
                                 </DataTemplate>
                             </TabItem.HeaderTemplate>
                             <Run Text="Name: Georg Listing&#x0a;Role: Bass Player&#x0a;Date of Birth: 31/03/1987&#x0a;Nationality: German&#x0a;Lives in: Berlin,Germany&#x0a;Relationship Status: Engaged"/>
@@ -143,9 +143,9 @@
                                         x:Name="GustavTabItem">
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
+                                    <!--<StackPanel Orientation="Horizontal">
                                         <Image Source="Images/Gustav.jpg" Width="50" Height="50" Stretch="Fill"/>
-                                    </StackPanel>
+                                    </StackPanel>-->
                                 </DataTemplate>
                             </TabItem.HeaderTemplate>
                             <Run Text="Name: Gustav Schaefer&#x0a;Role: Drummer&#x0a;Date of Birth: 09/08/1988&#x0a;Nationality: German&#x0a;Lives in: Magdeburg, Germany&#x0a;Relationship Status: Married"/>
@@ -160,6 +160,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="UserProfileButton"  Margin="240,0,20,0" HorizontalAlignment="Left" Width="100" Content="User Profile" Click="UserProfile_Click" ></Button>
                 <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" Name="DiscographyButton" Margin="20,0,20,0" HorizontalAlignment="Right"  Width="100" Content="Discography" Click="Discography_Click" ></Button>
+                    <Button FontFamily="Permanent Marker" Foreground="Black" Background="Goldenrod" x:Name="DiscographyButton_Copy" Margin="20,0,20,0" HorizontalAlignment="Right"  Width="100" Content="Music Player" Click="DiscographyButton_Copy_Click" />
                 </StackPanel>
             </Border>
         </Grid>
